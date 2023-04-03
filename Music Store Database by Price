@@ -1,0 +1,25 @@
+-- CREATE A MUSIC STORE DATABASE
+
+CREATE TABLE musicstore (id INTEGER PRIMARY KEY, name TEXT, aisle INTEGER, genre TEXT, price NUMERIC);
+
+INSERT INTO musicstore VALUES (1, "Taylor Swift", 1, "Pop", 17.99);
+INSERT INTO musicstore VALUES (2, "Imagine Dragons", 2, "Alternative", 16.99);
+INSERT INTO musicstore VALUES (3, "Good Charlotte", 2, "Alternative", 14.99);
+INSERT INTO musicstore VALUES (4, "Morgen Wallen", 3, "Country", 20.99);
+INSERT INTO musicstore VALUES (5, "Drake", 1, "Pop", 15.99);
+INSERT INTO musicstore VALUES (6, "Shakira", 1, "Pop", 13.99);
+INSERT INTO musicstore VALUES (7, "Simple Plan", 2, "Alternative", 12.99);
+INSERT INTO musicstore VALUES (8, "Luke Combs", 3, "Country", 18.99);
+INSERT INTO musicstore VALUES (9, "Carrie Underwood", 3, "Country", 16.99);
+INSERT INTO musicstore VALUES (10, "Kendrick Lamar", 4, "Rap", 16.99);
+INSERT INTO musicstore VALUES (11, "Kanye West", 4, "Rap", 18.99);
+INSERT INTO musicstore VALUES (12, "Travis Scott", 4, "Rap", 14.99);
+INSERT INTO musicstore VALUES (13, "Pierce the Veil", 5, "Emo", 16.99);
+INSERT INTO musicstore VALUES (14, "Jaws of Life", 5, "Emo", 14.99);
+INSERT INTO musicstore VALUES (15, "Fall Out Boy", 5, "Emo", 19.99);
+
+-- Select all columns and order by price
+SELECT * FROM musicstore ORDER BY price;
+
+-- Select all information where price is greater than $16.00.
+SELECT * FROM musicstore WHERE price < 16
