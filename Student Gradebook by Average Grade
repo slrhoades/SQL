@@ -1,0 +1,69 @@
+/* In this SQL query, I aggregated data to determine Valedictorian and Salutatorian placement of students by calculating average grade and case statements.*/
+
+/* Put your data in here and query it! */
+CREATE TABLE student_grades (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    number_grade INTEGER,
+    fraction_completed REAL);
+    
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 80, 0.805);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winnefer", 60, 0.901);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 85, 0.906);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 66, 0.7054);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 76, 0.5013);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 82, 0.9045);
+    INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 90, 0.805);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winnefer", 95, 0.901);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 85, 0.906);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 66, 0.7054);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 76, 0.5013);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 82, 0.9045);
+    INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 78, 0.890);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winnefer", 95, 0.901);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 91, 0.906);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 65, 0.7514);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 76, 0.5013);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 82, 0.9045);
+
+SELECT * from student_grades;
+
+/* OR PRACTICE */
+
+SELECT * from student_grades WHERE name = "Winnefer" OR name = "Winster" OR name = "Winsteen" OR name = "Wincifer";
+
+/*COUNT GROUP BY PRACTICE */
+
+SELECT * FROM student_grades GROUP BY fraction_completed;
+
+SELECT MAX(fraction_completed) from student_grades;
+
+SELECT COUNT(*),
+    CASE
+        WHEN number_grade > 90 THEN "A"
+        WHEN number_grade > 80 THEN "B"
+        WHEN number_grade > 70 THEN "C"
+        ELSE "F"
+    END as "letter_grade"
+    FROM student_grades
+    GROUP BY letter_grade;
+
+SELECT name, AVG(number_grade) AS average_grade FROM student_grades GROUP BY name HAVING average_grade > 80;
