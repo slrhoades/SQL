@@ -1,0 +1,123 @@
+/* Create table about the people and what they do here */
+CREATE TABLE mostfamouspeople (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ Name TEXT,
+ Trade TEXT,
+ Residence TEXT);
+
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Beyonce", "Singer", "Bel Air");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Jim Carrey", "Actor", "Los Angeles");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Leonardo DiCaprio", "Actor", "Los Angeles");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Britney Spears", "Singer", "Los Angeles");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Angelina Jolie", "Actor", "Beverly Hills");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Oprah Winfrey", "Television Host", "Montecito");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Jennifer Lopez", "Singer", "Los Angeles");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Joe Biden", "Politician", "Washington, DC");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Brad Pitt", "Actor", "Beverly Hills");
+INSERT INTO mostfamouspeople (name, trade, residence)
+    VALUES ("Bill Gates", "Inventor", "Medina");
+
+CREATE TABLE celebritycouples (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+wife TEXT,
+husband TEXT,
+yearsmarried INTEGER);
+
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Beyonce", "Jay Z", 21);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Jennifer Lopez", "Ben Affleck", 20);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Blake Lively", "Ryan Reynolds", 11);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Selena Gomez", "Justin Bieber", 8);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Winona Ryder", "Johnny Depp", 3);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Jada Pinkett Smith", "Will Smith", 27);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Kim Kardashian", "Kanye West", 8);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Goldie Hawn", "Kurt Russell", 39);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Miley Cyrus", "Liam Hemsworth", 9);
+INSERT INTO celebritycouples (wife, husband, yearsmarried)
+    VALUES ("Demi Moore", "Bruce Willis", 11);
+    
+CREATE TABLE networth (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+celebrity TEXT,
+trade TEXT,
+networth INTEGER);
+
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("George Lucas", "Film Maker", 10000000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Steven Spielberg", "Film Maker", 8000000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Oprah Winfrey", "Television Host", 3500000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Jami Gertz", "Actor", 3000000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Jay Z", "Singer", 2000000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Rihanna", "Singer", 1700000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Kim Kardashian", "Socialite", 1400000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Sir Paul McCartney", "Singer", 1200000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("Slavica Ecclestone", "Model", 1200000000);
+INSERT INTO networth (celebrity, trade, networth)
+    VALUES ("David Copperfield", "Magician", 1000000000);
+    
+/*Aggregating data to determine which of the most famous people are also part of a famous celebrity couple. Determination: Several of the most famous WOMEN in Hollywood are part of a celebrity couple.*/
+
+SELECT mfp.name, mfp.trade, cc.husband
+FROM mostfamouspeople as mfp
+Inner JOIN celebritycouples as cc
+ON mfp.name = cc.wife;
+
+/*Aggregating data to determine which of the most famous people are also part of a famous celebrity couple. Determination: The most famous MEN in Hollywood are not married to the most famous women.*/
+
+SELECT mfp.name, mfp.trade, cc.wife
+FROM mostfamouspeople as mfp
+LEFT JOIN celebritycouples as cc
+ON mfp.name = cc.husband;
+
+/*Aggregating data to determine which of the most famous people is also one of the richest people in the world. LEFT JOIN*/
+
+SELECT mfp.name, mfp.trade, nw.networth
+FROM mostfamouspeople as mfp
+LEFT JOIN networth as nw
+ON mfp.name = nw.celebrity;
+
+/*Aggregating data to determine which of the most famous people is also one of the richest people in the world. INNER JOIN clearly displays Oprah.*/
+
+SELECT mfp.name, mfp.trade, nw.networth
+FROM mostfamouspeople as mfp
+INNER JOIN networth as nw
+ON mfp.name = nw.celebrity;
+
+/*Aggregating data to determine which celebrity couples have top 10 richest people. DETERMINATION: Kanye West has a very wealthy wife.*/
+
+SELECT cc.wife, cc.husband, nw.id, nw.networth
+FROM celebritycouples as cc
+INNER JOIN networth as nw
+ON cc.wife = nw.celebrity;
+
+/*Aggregating data to determine which celebrity couples have top 10 richest people. DETERMINATION: Beyonce has a very wealthy husband*/
+
+SELECT cc.wife, cc.husband, nw.id, nw.networth
+FROM celebritycouples as cc
+INNER JOIN networth as nw
+ON cc.husband = nw.celebrity;
